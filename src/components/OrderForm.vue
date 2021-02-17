@@ -37,6 +37,7 @@
         </div>
         <div class="order__count">
             {{vehiclesOrderParameters[5].name}}: 
+            <!-- Слайдер -->
             <div class="carousel">
                 <button @click.prevent="showPrev">-</button>
                 <VueSlickCarousel class="slider" :arrows="false" v-bind="settings" ref="carousel">
@@ -98,6 +99,7 @@ export default {
             nameMistake: false,
             emailMistake: false,
             orderBuy: false,
+            // Дополнительные настройки слайдера
             settings: {
                 "edgeFriction": 0.35,
                 "infinite": true,
@@ -114,12 +116,14 @@ export default {
         VueSlickCarousel
     },
     methods: {
+        // Отправка формы
         submitHandler() {
             if(!this.nameMistake && !this.emailMistake) {
                 alert("Спасибо за покупку!")
                 this.$emit('submitHandler', false)
             }
         },
+        // Проверки формы, формирование заказа в JSON, очистка формы
         submitForm() {
             this.checkName()
             this.checkEmail()
@@ -140,6 +144,7 @@ export default {
                 this.address=""  
             }    
         },
+        // Проверка и валидация введенного имени
         checkName() {
             this.nameMistake = false
             const orderName = document.getElementById('name')
@@ -171,6 +176,7 @@ export default {
                 this.nameMistake = true
             }
         },
+        // Проверка и валидация введенного email
         checkEmail() {
             this.emailMistake = false
             const EMAIL_REGEXP = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
@@ -188,12 +194,15 @@ export default {
                 this.emailMistake = true
             }
         },
+        // Запись о времени доставки
         changeTime: function(e){
             this.deliveryTime = e.target.value
         },
+        // Запись о выбранном цвете
         changeColor: function(e){
             this.vehicleColor = e.target.value
         },
+        // Прокрутка слайдера вперед
         showNext() {
             this.$refs.carousel.next()
             this.vehicleValue++
@@ -201,6 +210,7 @@ export default {
                     this.vehicleValue = 1
                 }
         },
+        // Прокрутка слайдера назад
         showPrev() {
             this.$refs.carousel.prev()
             this.vehicleValue--
@@ -208,6 +218,7 @@ export default {
                     this.vehicleValue = 10
                 }
         },
+        // Закрытие формы при нажатии клавиши "Отмена"
         cancelForm() {
             this.$emit('cancelForm', false)
         }

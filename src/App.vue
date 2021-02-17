@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <!-- Карточка товара -->
     <VehicleCard 
       :key="unitCode"
       v-bind:vehicles="vehicles"
@@ -31,6 +32,7 @@ export default {
     VehicleCard
   },
   mounted() {
+    // Получение JSON
       fetch('https://raw.githubusercontent.com/maxxeefy/masterhost_json/main/master.json')
         .then((response) => response.json())
         .then(json => {

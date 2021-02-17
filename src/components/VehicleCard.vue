@@ -3,11 +3,13 @@
         <h1>{{vehicles.brand}} {{vehicles.name}}</h1>
         <img :src="vehicles.image" class="card__image">
         <div class="card__description">
+            <!-- Характеристики товара -->
             <VehicleProp 
                 :key="propertie.name"
                 v-for="propertie of vehiclesProp"
                 v-bind:propertie="propertie"
             />
+            <!-- Выбор цвета -->
             <select class="vehicle__color">
                 <option disabled selected>Выберите цвет</option>
                 <VehicleColors 
@@ -19,6 +21,7 @@
             <span class="vehicle__price">Цена: {{vehicles.unitPrice}}</span>
             <button v-on:click="buy = true" class="vehicle__buy">Купить</button>
         </div>
+        <!-- Форма заказа -->
         <div v-if="buy" class="vehicle__order">
                 <OrderForm 
                     v-bind:vehiclesOrderParameters="vehiclesOrderParameters"
